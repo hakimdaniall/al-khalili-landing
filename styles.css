@@ -340,7 +340,7 @@ nav {
     padding: 80px 0;
     background-color: var(--light-bg);
     position: relative;
-    text-align: center;
+    text-align: justify;
 }
 
 /* CSS for Replacing the Discount Section */
@@ -983,7 +983,7 @@ footer {
     position: absolute;
     width: 20px;
     height: 20px;
-    right: -10px;
+    right: -14px;
     background-color: #fff;
     border: 4px solid var(--primary-color);
     top: 15px;
@@ -992,7 +992,7 @@ footer {
 }
 
 .timeline-item:nth-child(even)::after {
-    left: -10px;
+    left: -14px;
 }
 
 .year {
@@ -1201,8 +1201,6 @@ header.scrolled {
     background-color: #fff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    top: 0;
-    border-radius: 0;
-    padding: 15px 0;
+    top: 20px;
     transition: all 0.3s ease;
 } 
