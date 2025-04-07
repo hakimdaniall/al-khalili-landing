@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Testimonial Slider
     const testimonialDots = document.querySelectorAll('.testimonial-dots .dot');
+    
+    // Timeline Animation
+    const timelineItems = document.querySelectorAll('.timeline-item');
 
     // Scroll Event
     window.addEventListener('scroll', function() {
@@ -17,6 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             header.classList.remove('scrolled');
         }
+        
+        // Animate timeline items when they come into view
+        timelineItems.forEach(item => {
+            const itemTop = item.getBoundingClientRect().top;
+            if (itemTop < window.innerHeight - 100) {
+                item.classList.add('animated');
+            }
+        });
     });
 
     // Active Menu Item
@@ -24,6 +35,26 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function(e) {
             menuItems.forEach(menuItem => menuItem.classList.remove('active'));
             this.classList.add('active');
+        });
+    });
+
+    // Add active class to current section in nav
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${current}`) {
+                item.classList.add('active');
+            }
         });
     });
 
@@ -144,11 +175,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return emailRegex.test(email);
     }
 
-    // AOS Animation (you would need to include AOS library for this to work)
-    // Uncomment if you add AOS library
-    // AOS.init({
-    //     duration: 800,
-    //     easing: 'ease-in-out',
-    //     once: true
-    // });
+    // Add animation class to timeline items initially in view
+    timelineItems.forEach(item => {
+        const itemTop = item.getBoundingClientRect().top;
+        if (itemTop < window.innerHeight - 100) {
+            item.classList.add('animated');
+        }
+    });
 }); 
