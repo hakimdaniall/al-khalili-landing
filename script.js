@@ -1,5 +1,49 @@
 // DOM Elements
 document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        
+        if (!navLinks.classList.contains('show')) {
+            // First make the menu visible but with 0 height
+            navLinks.style.display = 'flex';
+            
+            // Force browser to recognize the display change before adding the show class
+            setTimeout(() => {
+                navLinks.classList.add('show');
+            }, 10);
+        } else {
+            // When closing, we remove the show class first, then hide after animation completes
+            navLinks.classList.remove('show');
+            
+            // Wait for the transition to finish before hiding the menu
+            setTimeout(() => {
+                if (!navLinks.classList.contains('show')) {
+                    navLinks.style.display = 'none';
+                }
+            }, 400); // Match this with the CSS transition time
+        }
+    });
+    
+    // Close mobile menu when clicking on a nav link
+    const navItems = document.querySelectorAll('.nav-links a');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('show');
+            
+            // Wait for the transition to finish before hiding the menu
+            setTimeout(() => {
+                if (!navLinks.classList.contains('show')) {
+                    navLinks.style.display = 'none';
+                }
+            }, 400); // Match this with the CSS transition time
+        });
+    });
+    
     // Navigation
     const header = document.querySelector('header');
     const menuItems = document.querySelectorAll('.nav-links a');
