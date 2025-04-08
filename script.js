@@ -4,6 +4,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     
+    // Function to check if we're on mobile view
+    function isMobileView() {
+        return window.innerWidth <= 768; // Match this with your CSS media query breakpoint
+    }
+    
+    // Function to reset nav display on screen size change
+    function resetNavDisplay() {
+        if (!isMobileView()) {
+            navLinks.style.display = 'flex';
+            navLinks.classList.remove('show');
+        } else if (!navLinks.classList.contains('show')) {
+            navLinks.style.display = 'none';
+        }
+    }
+    
+    // Listen for window resize and reset nav
+    window.addEventListener('resize', resetNavDisplay);
+    
+    // Initial call to set correct state
+    resetNavDisplay();
+    
     mobileMenuBtn.addEventListener('click', function() {
         this.classList.toggle('active');
         
@@ -21,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Wait for the transition to finish before hiding the menu
             setTimeout(() => {
-                if (!navLinks.classList.contains('show')) {
+                // Only hide if we're still in mobile view and menu isn't showing
+                if (isMobileView() && !navLinks.classList.contains('show')) {
                     navLinks.style.display = 'none';
                 }
             }, 400); // Match this with the CSS transition time
@@ -37,7 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Wait for the transition to finish before hiding the menu
             setTimeout(() => {
-                if (!navLinks.classList.contains('show')) {
+                // Only hide if we're still in mobile view and menu isn't showing
+                if (isMobileView() && !navLinks.classList.contains('show')) {
                     navLinks.style.display = 'none';
                 }
             }, 400); // Match this with the CSS transition time
