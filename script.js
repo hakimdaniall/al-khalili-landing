@@ -9,11 +9,33 @@ document.addEventListener('DOMContentLoaded', function() {
         return window.innerWidth <= 768; // Match this with your CSS media query breakpoint
     }
     
+    // Function to toggle body scroll
+    function toggleBodyScroll(disable) {
+        if (disable) {
+            // Save current scroll position and disable scrolling
+            document.body.style.top = `-${window.scrollY}px`;
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Restore scrolling and position
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+            if (scrollY) {
+                window.scrollTo(0, parseInt(scrollY || '0') * -1);
+            }
+        }
+    }
+    
     // Function to reset nav display on screen size change
     function resetNavDisplay() {
         if (!isMobileView()) {
             navLinks.style.display = 'flex';
             navLinks.classList.remove('show');
+            toggleBodyScroll(false); // Ensure scrolling is enabled on desktop
         } else if (!navLinks.classList.contains('show')) {
             navLinks.style.display = 'none';
         }
@@ -32,6 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // First make the menu visible but with 0 height
             navLinks.style.display = 'flex';
             
+            // Disable scrolling when menu is open
+            if (isMobileView()) {
+                toggleBodyScroll(true);
+            }
+            
             // Force browser to recognize the display change before adding the show class
             setTimeout(() => {
                 navLinks.classList.add('show');
@@ -39,6 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             // When closing, we remove the show class first, then hide after animation completes
             navLinks.classList.remove('show');
+            
+            // Re-enable scrolling when menu is closed
+            if (isMobileView()) {
+                toggleBodyScroll(false);
+            }
             
             // Wait for the transition to finish before hiding the menu
             setTimeout(() => {
@@ -56,6 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function() {
             mobileMenuBtn.classList.remove('active');
             navLinks.classList.remove('show');
+            
+            // Re-enable scrolling when menu is closed via nav link click
+            if (isMobileView()) {
+                toggleBodyScroll(false);
+            }
             
             // Wait for the transition to finish before hiding the menu
             setTimeout(() => {
