@@ -73,6 +73,7 @@ p {
 }
 
 .btn {
+    font-family: 'Poppins', sans-serif;
     display: inline-block;
     padding: 12px 30px;
     border-radius: 30px;
@@ -200,7 +201,7 @@ nav {
     overflow: hidden;
 }
 
-.hero-section::before {
+/* .hero-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -209,7 +210,7 @@ nav {
     height: 100%;
     background: rgba(245, 240, 255, 0.7);
     z-index: 0;
-}
+} */
 
 .hero-content {
     max-width: 800px;
