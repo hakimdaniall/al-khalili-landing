@@ -979,6 +979,10 @@ footer {
         flex-direction: column;
         gap: 30px;
     }
+
+    .faq-question h3 {
+        width: 80%;
+    }
 }
 
 @media (max-width: 576px) {
