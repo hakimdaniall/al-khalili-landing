@@ -163,20 +163,55 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // FAQ Accordion
-    faqItems.forEach(item => {
+    faqItems.forEach((item, index) => {
         const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        
+        // Ensure any paragraphs in answers have initial state
+        const paragraphs = item.querySelectorAll('.faq-answer p');
+        paragraphs.forEach(p => {
+            p.style.opacity = '0';
+            p.style.transform = 'translateY(10px)';
+        });
         
         question.addEventListener('click', function() {
             // Close all other FAQ items
-            faqItems.forEach(faqItem => {
+            faqItems.forEach((faqItem, i) => {
                 if (faqItem !== item) {
                     faqItem.classList.remove('active');
+                    
+                    // Reset paragraphs in closed items
+                    const closedParagraphs = faqItem.querySelectorAll('.faq-answer p');
+                    closedParagraphs.forEach(p => {
+                        p.style.opacity = '0';
+                        p.style.transform = 'translateY(10px)';
+                        p.style.transitionDelay = '0s';
+                    });
                 }
             });
             
-            // Toggle current FAQ item
-            item.classList.toggle('active');
+            // Toggle current FAQ item with a slight delay for effect
+            setTimeout(() => {
+                item.classList.toggle('active');
+                
+                // Add a staggered entrance effect for multiple FAQ items
+                if (item.classList.contains('active')) {
+                    // Apply staggered animation delay to child paragraph
+                    paragraphs.forEach((p, i) => {
+                        p.style.transitionDelay = (0.1 + (i * 0.05)) + 's';
+                        setTimeout(() => {
+                            p.style.opacity = '1';
+                            p.style.transform = 'translateY(0)';
+                        }, 100); // Small delay for better effect
+                    });
+                }
+            }, item.classList.contains('active') ? 0 : 50);
         });
+        
+        // Add initial delay for first page load
+        setTimeout(() => {
+            item.style.transition = 'all 0.3s ease';
+        }, 100);
     });
 
     // Testimonial Slider
