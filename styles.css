@@ -251,7 +251,10 @@ nav {
 /* Hero Section */
 .hero-section {
     background: url("./assets/bg.png") no-repeat center center;
-    background-size: cover;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    background-size: 100vw;
+    background-attachment: scroll;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -1309,6 +1312,7 @@ header.scrolled {
     .hero-section {
         height: 100vh;
         min-height: 500px;
+        background-size: cover;
     }
 
     .hero-content h1 {
