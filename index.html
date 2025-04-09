@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -14,7 +15,7 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <h2>Al Khalili Consultant</h2>
+                    <img src="./assets/alkhalili-logo.png" alt="">
                 </div>
                 <div class="mobile-menu-btn">
                     <span></span>
@@ -121,60 +122,61 @@
     <!-- History Section -->
     <section id="history" class="history-section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Our History</span>
+          <div class="section-header">
+            <span class="section-tag">Our History</span>
+          </div>
+          <div class="timeline">
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a6/Putrajaya_Malaysia_Ministry-of-Education-04.jpg)" data-year="2015">
+                  <div class="swiper-slide-content">
+                    <span class="timeline-year">2015</span>
+                    <h4 class="timeline-title">Our Founding Year</h4>
+                    <p class="timeline-text">Started with MOE-supported program 'KE ARAH MELAHIRKAN PELAJAR ALIRAN SAINS' focusing on Science & Math seminars and workshops.</p>
+                  </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(https://www.foyerglobalhealth.com/wp-content/uploads/2024/09/pexels-yulia-2077612-3815533-1568x1045.jpg)" data-year="2016">
+                  <div class="swiper-slide-content">
+                    <span class="timeline-year">2016</span>
+                    <h4 class="timeline-title">Expansion Year</h4>
+                    <p class="timeline-text">Expanded seminars and workshops to Kuala Lumpur, Johor Bahru & Penang.</p>
+                  </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(https://harakahdaily.net/wp-content/uploads/2021/11/18112021exam.jpg)" data-year="2017">
+                  <div class="swiper-slide-content">
+                    <span class="timeline-year">2017</span>
+                    <h4 class="timeline-title">Program Development</h4>
+                    <p class="timeline-text">Due to high demand, organized new programs including 'Score A Seminar & Answering Technique' and 'Higher Order Thinking Skills' covering all major public exams across Peninsular Malaysia.</p>
+                  </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(https://dam.mediacorp.sg/image/upload/s--oHf0b23O--/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/c_fill,g_auto,h_676,w_1200/v1/mediacorp/cna/image/2024/09/11/img_9237.jpg?itok=hlyMHseo)" data-year="2018">
+                  <div class="swiper-slide-content">
+                    <span class="timeline-year">2018</span>
+                    <h4 class="timeline-title">National Coverage</h4>
+                    <p class="timeline-text">Programs expanded to Sabah and Sarawak to reach students nationwide.</p>
+                  </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(https://sureworks.info/__file/EFSF%20Feb%202025.jpg?ulid=01JM8TR8RCEXK9R42XYF3PBMGE)" data-year="2025">
+                  <div class="swiper-slide-content">
+                    <span class="timeline-year">2025</span>
+                    <h4 class="timeline-title">Higher Education Focus</h4>
+                    <p class="timeline-text">In collaboration with educational partners, organized Higher Education Fair and Roadshow in 5 major cities including Sabah & Sarawak.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
             </div>
-            <h2>Our Journey Since 2015</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="year">2015</div>
-                    <div class="content">
-                        <p>Started with MOE-supported program 'KE ARAH MELAHIRKAN PELAJAR ALIRAN SAINS' focusing on Science & Math seminars/workshops.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="year">2016</div>
-                    <div class="content">
-                        <p>Expanded seminars and workshops to Kuala Lumpur, Johor Bahru & Penang.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="year">2017</div>
-                    <div class="content">
-                        <p>Due to high demand, organized:</p>
-                        <ul>
-                            <li>'Score A Seminar & Answering Technique'</li>
-                            <li>'Higher Order Thinking Skills'</li>
-                        </ul>
-                        <p>Covering all major public exams (UPSR, PT3, SPM, STPM, GCE O Level, A Level, MUET) across Peninsular Malaysia.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="year">2018</div>
-                    <div class="content">
-                        <p>Programs expanded to Sabah and Sarawak.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="year">2025</div>
-                    <div class="content">
-                        <p>In collaboration with:</p>
-                        <ul>
-                            <li>Persidangan tahunan Guru Bimbingan & Kaunseling (PGBK)</li>
-                            <li>College Readiness Seminar for School Leavers</li>
-                        </ul>
-                        <p>We organized Higher Education Fair and Roadshow in 5 major cities including Sabah & Sarawak.</p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
     <!-- Products & Services Section -->
     <section id="services" class="services-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Products & Services</span>
+                <span class="section-tag" style="background: #fff;">Products & Services</span>
             </div>
             <h2>What We Offer</h2>
             <div class="services-container">
@@ -209,7 +211,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section">
+    <!-- <section class="testimonials-section">
         <div class="container">
             <div class="testimonial">
                 <div class="rating">
@@ -236,7 +238,7 @@
                 <span class="dot"></span>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Blog Section -->
     <section id="blog" class="blog-section">
@@ -305,7 +307,7 @@
     <section id="faq" class="faq-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">FAQ's</span>
+                <span class="section-tag" style="background: #fff;">FAQ's</span>
             </div>
             <h2>Frequently Asked Questions</h2>
             <div class="faq-accordion">
@@ -424,5 +426,26 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+    <script>
+        var timelineSwiper = new Swiper('.timeline .swiper-container', {
+        direction: 'vertical',
+        loop: false,
+        speed: 1600,
+        pagination: '.swiper-pagination',
+        paginationBulletRender: function(swiper, index, className) {
+            var year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
+            return '<span class="' + className + '">' + year + '</span>';
+        },
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        breakpoints: {
+            768: {
+            direction: 'horizontal'
+            }
+        }
+        });
+    </script>
 </body>
 </html> 
