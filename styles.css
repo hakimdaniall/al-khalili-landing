@@ -158,8 +158,15 @@ nav {
     align-items: center;
 }
 
+.logo {
+    margin: -20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .logo img {
-    height: 40px;
+    height: 88px;
 }
 
 .nav-links {
@@ -1264,6 +1271,7 @@ header.scrolled {
   transform: translate3d(0, 0, 0);
   transition: 0.4s ease 1.8s;
   color: #fff;
+  font-size: 14px;
 }
 .timeline .swiper-pagination {
   right: 15% !important;
@@ -1358,8 +1366,9 @@ header.scrolled {
     font-size: 32px;
   }
   .timeline .swiper-slide .timeline-title {
-    font-size: 46px;
-    margin: 0;
+      font-size: 46px;
+      margin: 0;
+      margin-bottom: 10px;
   }
   .timeline .swiper-pagination {
     display: flex;
