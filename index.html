@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al Khalili Consultant - Education Seminars & Expos</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="./assets/alkhalili-logo.png" as="image">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js" as="script">
+    
+    <!-- Preload hero image and other key images -->
+    <link rel="preload" href="https://varthana.com/school/wp-content/uploads/2023/05/B357.jpg" as="image">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 </head>
 <body>
+    <!-- Loading overlay -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
     <header>
         <div class="container">
             <nav>
@@ -58,7 +78,7 @@
                     <p>We also organize Higher Education Expos and Roadshows in five major Malaysian cities to help school leavers prepare for higher education enrollment.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://varthana.com/school/wp-content/uploads/2023/05/B357.jpg" alt="Education seminars">
+                    <img src="https://varthana.com/school/wp-content/uploads/2023/05/B357.jpg" alt="Education seminars" loading="lazy">
                 </div>
             </div>
             <div class="vision-mission">
@@ -216,7 +236,7 @@
                     </div>
                     <p>The SCORE A Seminar helped me understand exam techniques that weren't covered in my regular classes. I improved my SPM results significantly!</p>
                     <div class="blog-author">
-                        <img src="assets/person-1.svg" alt="Student">
+                        <img src="assets/person-1.svg" alt="Student" loading="lazy">
                         <div class="author-info">
                             <h4>Ahmad Razif</h4>
                             <p>SPM Student</p>
@@ -229,7 +249,7 @@
                     </div>
                     <p>As a teacher, I've seen remarkable improvement in my students who attended Al Khalili's workshops. Their approach to Higher Order Thinking Skills is exceptional.</p>
                     <div class="blog-author">
-                        <img src="assets/person-1.svg" alt="Teacher">
+                        <img src="assets/person-1.svg" alt="Teacher" loading="lazy">
                         <div class="author-info">
                             <h4>Puan Noraini</h4>
                             <p>Secondary School Teacher</p>
@@ -242,7 +262,7 @@
                     </div>
                     <p>The Higher Education Fair was eye-opening. I found the perfect university program and received valuable guidance on scholarship applications.</p>
                     <div class="blog-author">
-                        <img src="assets/person-1.svg" alt="Student">
+                        <img src="assets/person-1.svg" alt="Student" loading="lazy">
                         <div class="author-info">
                             <h4>Lee Wei Ling</h4>
                             <p>STPM Graduate</p>
@@ -255,7 +275,7 @@
                     </div>
                     <p>Our school has partnered with Al Khalili for three years now. Their seminars consistently deliver results, with our students showing marked improvement in examination performance.</p>
                     <div class="blog-author">
-                        <img src="assets/person-1.svg" alt="Principal">
+                        <img src="assets/person-1.svg" alt="Principal" loading="lazy">
                         <div class="author-info">
                             <h4>Dr. Subramaniam</h4>
                             <p>School Principal</p>
@@ -386,26 +406,32 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js" defer></script>
     <script>
-        var timelineSwiper = new Swiper('.timeline .swiper-container', {
-            direction: 'vertical',
-            loop: false,
-            speed: 1600,
-            pagination: '.swiper-pagination',
-            paginationBulletRender: function(swiper, index, className) {
-                var year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
-                return '<span class="' + className + '">' + year + '</span>';
-            },
-            paginationClickable: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            breakpoints: {
-                768: {
-                    direction: 'horizontal'
-                }
-            }
+        // Initialize Swiper only after resources have loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Delay Swiper initialization slightly to ensure DOM is fully ready
+            setTimeout(() => {
+                var timelineSwiper = new Swiper('.timeline .swiper-container', {
+                    direction: 'vertical',
+                    loop: false,
+                    speed: 1600,
+                    pagination: '.swiper-pagination',
+                    paginationBulletRender: function(swiper, index, className) {
+                        var year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
+                        return '<span class="' + className + '">' + year + '</span>';
+                    },
+                    paginationClickable: true,
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    breakpoints: {
+                        768: {
+                            direction: 'horizontal'
+                        }
+                    }
+                });
+            }, 100);
         });
     </script>
 </body>

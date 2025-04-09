@@ -1,5 +1,88 @@
 // DOM Elements
 document.addEventListener('DOMContentLoaded', function() {
+    // Loading overlay functionality
+    const loadingOverlay = document.getElementById('loading-overlay');
+    
+    // List of assets to preload
+    const imagesToPreload = [
+        './assets/alkhalili-logo.png',
+        'https://varthana.com/school/wp-content/uploads/2023/05/B357.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/a/a6/Putrajaya_Malaysia_Ministry-of-Education-04.jpg',
+        'https://www.foyerglobalhealth.com/wp-content/uploads/2024/09/pexels-yulia-2077612-3815533-1568x1045.jpg',
+        'https://harakahdaily.net/wp-content/uploads/2021/11/18112021exam.jpg',
+        'https://dam.mediacorp.sg/image/upload/s--oHf0b23O--/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/c_fill,g_auto,h_676,w_1200/v1/mediacorp/cna/image/2024/09/11/img_9237.jpg?itok=hlyMHseo',
+        'https://sureworks.info/__file/EFSF%20Feb%202025.jpg?ulid=01JM8TR8RCEXK9R42XYF3PBMGE'
+    ];
+    
+    // Check when page and all resources are fully loaded
+    function hideLoading() {
+        loadingOverlay.classList.add('hidden');
+        // Remove after transition completes
+        setTimeout(() => {
+            if (loadingOverlay.parentNode) {
+                loadingOverlay.parentNode.removeChild(loadingOverlay);
+            }
+        }, 500);
+    }
+    
+    // Preload images
+    let loadedImages = 0;
+    const totalImages = imagesToPreload.length;
+    
+    function preloadImages() {
+        if (totalImages === 0) {
+            // If no images to preload, hide loading immediately
+            hideLoading();
+            return;
+        }
+        
+        imagesToPreload.forEach(src => {
+            const img = new Image();
+            img.onload = img.onerror = function() {
+                loadedImages++;
+                if (loadedImages === totalImages) {
+                    // All images loaded, hide the overlay
+                    hideLoading();
+                }
+            };
+            img.src = src;
+        });
+    }
+    
+    // Start preloading images
+    preloadImages();
+    
+    // Fallback - hide loading after 5 seconds even if not all assets are loaded
+    const loadingTimeout = setTimeout(() => {
+        hideLoading();
+    }, 5000);
+    
+    // Handle window.load event for complete loading
+    window.addEventListener('load', function() {
+        // Clear the timeout as window.load means everything is loaded
+        clearTimeout(loadingTimeout);
+        // Hide loading overlay if it hasn't been hidden yet
+        hideLoading();
+        
+        // Optimize images that were lazy loaded
+        const lazyLoadImages = document.querySelectorAll('img[loading="lazy"]');
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyLoadImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    });
+    
     // Mobile Menu Toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
