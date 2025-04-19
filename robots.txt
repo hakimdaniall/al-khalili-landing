@@ -1,0 +1,8 @@
+# robots.txt for alkhaliliconsultant.my
+
+User-agent: *
+Allow: /
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://alkhaliliconsultant.my/sitemap.xml 
