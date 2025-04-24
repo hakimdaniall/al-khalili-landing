@@ -329,13 +329,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Form Validation
-    const contactForm = document.querySelector('.contact-form');
+    // Contact Form Submission
+    const contactForm = document.querySelector('#contactForm');
+    const formStatus = document.querySelector('#form-status');
+    const submitBtn = document.querySelector('#submitBtn');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+            // No need to preventDefault as we're allowing the form to submit naturally
             
+            // Form validation (still good to perform client-side)
             const nameInput = document.getElementById('name');
             const emailInput = document.getElementById('email');
             const messageInput = document.getElementById('message');
@@ -345,6 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!nameInput.value.trim()) {
                 isValid = false;
                 nameInput.style.borderColor = 'red';
+                e.preventDefault();
             } else {
                 nameInput.style.borderColor = '#ddd';
             }
@@ -352,6 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
                 isValid = false;
                 emailInput.style.borderColor = 'red';
+                e.preventDefault();
             } else {
                 emailInput.style.borderColor = '#ddd';
             }
@@ -359,15 +364,23 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!messageInput.value.trim()) {
                 isValid = false;
                 messageInput.style.borderColor = 'red';
+                e.preventDefault();
             } else {
                 messageInput.style.borderColor = '#ddd';
             }
             
-            if (isValid) {
-                // In a real implementation, you would submit the form to a server
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
+            if (!isValid) {
+                formStatus.textContent = 'Please fill out all fields correctly.';
+                formStatus.style.color = 'red';
+                return false;
             }
+            
+            // If valid, the form will submit naturally
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // We return true to allow the form to submit (FormSubmit will handle the actual sending)
+            return true;
         });
     }
 
@@ -404,4 +417,8 @@ document.addEventListener('DOMContentLoaded', function() {
             item.classList.add('animated');
         }
     });
-}); 
+});
+
+// No need for the custom sendEmail function since FormSubmit handles this
+// Delete or comment out the sendEmail function
+// function sendEmail(formData) { ... } 
