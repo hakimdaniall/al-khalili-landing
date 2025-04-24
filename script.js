@@ -335,6 +335,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.querySelector('#submitBtn');
     
     if (contactForm) {
+        // Add button micro interaction
+        submitBtn.addEventListener('click', function(e) {
+            // Add ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('btn-ripple');
+            this.appendChild(ripple);
+            
+            // Calculate position
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
         contactForm.addEventListener('submit', function(e) {
             // No need to preventDefault as we're allowing the form to submit naturally
             
@@ -344,10 +365,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const messageInput = document.getElementById('message');
             let isValid = true;
             
+            // Clear previous validation states
+            nameInput.classList.remove('error');
+            emailInput.classList.remove('error');
+            messageInput.classList.remove('error');
+            
             // Simple validation
             if (!nameInput.value.trim()) {
                 isValid = false;
                 nameInput.style.borderColor = 'red';
+                nameInput.classList.add('error');
                 e.preventDefault();
             } else {
                 nameInput.style.borderColor = '#ddd';
@@ -356,6 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
                 isValid = false;
                 emailInput.style.borderColor = 'red';
+                emailInput.classList.add('error');
                 e.preventDefault();
             } else {
                 emailInput.style.borderColor = '#ddd';
@@ -364,6 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!messageInput.value.trim()) {
                 isValid = false;
                 messageInput.style.borderColor = 'red';
+                messageInput.classList.add('error');
                 e.preventDefault();
             } else {
                 messageInput.style.borderColor = '#ddd';
@@ -372,12 +401,21 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isValid) {
                 formStatus.textContent = 'Please fill out all fields correctly.';
                 formStatus.style.color = 'red';
+                formStatus.style.opacity = '1';
+                formStatus.style.transform = 'translateY(0)';
                 return false;
             }
             
-            // If valid, the form will submit naturally
+            // If valid, add sending animation to button
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.classList.add('btn-loading');
+            submitBtn.innerHTML = '<span class="btn-spinner"></span> Sending...';
+            
+            // Show sending message
+            formStatus.textContent = 'Sending your message...';
+            formStatus.style.color = 'var(--primary-color)';
+            formStatus.style.opacity = '1';
+            formStatus.style.transform = 'translateY(0)';
             
             // We return true to allow the form to submit (FormSubmit will handle the actual sending)
             return true;

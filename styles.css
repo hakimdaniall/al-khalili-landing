@@ -136,6 +136,8 @@ p {
     border: none;
     transition: var(--transition);
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
@@ -146,6 +148,52 @@ p {
 .btn-primary:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(138, 63, 252, 0.2);
+}
+
+/* Button ripple effect */
+.btn-ripple {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: scale(0);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Button loading state */
+.btn-loading {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    transition: all 0.3s ease;
+    cursor: not-allowed;
+}
+
+.btn-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spinner 0.8s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .btn-secondary {
@@ -1566,4 +1614,53 @@ header.scrolled {
   .timeline .swiper-slide-content {
     right: 25%;
   }
+}
+
+/* Form status animation */
+#form-status {
+    padding: 10px 0;
+    font-size: 14px;
+    height: 40px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+#form-status:not(:empty) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Form field focus effects */
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(138, 63, 252, 0.1);
+    outline: none;
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label {
+    color: var(--primary-color);
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #ff4757;
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 } 
